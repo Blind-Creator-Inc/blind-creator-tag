@@ -14,6 +14,13 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Blind Creator Tag",
+  "categories": [
+    "ADVERTISING",
+    "ANALYTICS",
+    "CONVERSIONS",
+    "MARKETING",
+    "REMARKETING"
+  ],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
