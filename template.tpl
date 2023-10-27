@@ -20,7 +20,7 @@ ___INFO___
     "CONVERSIONS",
     "MARKETING",
     "REMARKETING"
-  ],
+  ],  
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -99,7 +99,7 @@ function saveQueryParametersAsCookie() {
   
 function sendEventToBCAPI(eventName) {
   var localStorageValue = localStorage.getItem(localStorageVariable);  
-  sendPixel(apiUrl+encodeUriComponent(localStorageValue));
+  sendPixel(apiUrl+encodeUriComponent(localStorageValue)+"&bc_tag_event_name="+eventName);
 }
 
 const validate = (data) => {
@@ -318,5 +318,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 10/26/2023, 10:48:17 PM
+Created on 10/27/2023, 7:53:04 AM
+
 
