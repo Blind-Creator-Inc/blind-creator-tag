@@ -1,4 +1,6 @@
 homepage: "https://blindcreator.com/"
 versions:
+  - sha: 30b4d9bdcd884df9b8acf84abe6192ffa618acad
+    changeNotes: Send bc_tag_event_name
   - sha: b98e0ccc1d2b49e1582d022d76d385ac0824ca00
     changeNotes: Initial release.
