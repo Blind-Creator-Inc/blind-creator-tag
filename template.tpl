@@ -75,7 +75,7 @@ const encodeUriComponent = require('encodeUriComponent');
 const getTimestamp = require('getTimestamp');
 
 // default values
-const apiUrl = 'https://webhook.site/f5223bfb-b34f-47db-a946-6ed9bc0dbb59?';
+const apiUrl = 'https://02ca2gksv2.execute-api.us-east-1.amazonaws.com/default/new-event';
 const localStorageVariable = 'bc_tracker_utm';
 
 function saveQueryParametersAsCookie() { 
