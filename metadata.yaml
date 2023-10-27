@@ -1,2 +1,4 @@
 homepage: "https://blindcreator.com/"
 versions:
+  - sha: b98e0ccc1d2b49e1582d022d76d385ac0824ca00
+    changeNotes: Initial release.
