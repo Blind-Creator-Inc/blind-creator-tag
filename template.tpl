@@ -20,7 +20,7 @@ ___INFO___
     "CONVERSIONS",
     "MARKETING",
     "REMARKETING"
-  ],  
+  ],    
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -82,24 +82,28 @@ const encodeUriComponent = require('encodeUriComponent');
 const getTimestamp = require('getTimestamp');
 
 // default values
-const apiUrl = 'https://02ca2gksv2.execute-api.us-east-1.amazonaws.com/default/new-event';
+const apiUrl = 'https://02ca2gksv2.execute-api.us-east-1.amazonaws.com/default/v1/new-event';
 const localStorageVariable = 'bc_tracker_utm';
 
 function saveQueryParametersAsCookie() { 
-  var referralHost = getReferrerUrl("hostname");
-  var hostname = getUrl("hostname");
   var queryString = getUrl("query"); 
   if (queryString.indexOf(localStorageVariable) !== -1) {            
-    queryString += "&created_at=" + getTimestamp();
-    queryString += "&hostname=" + encodeUriComponent(hostname);           
-    queryString += "&referral_hostname=" + encodeUriComponent(referralHost);       
     localStorage.setItem(localStorageVariable, "?"+queryString);
   }  
 }
   
 function sendEventToBCAPI(eventName) {
-  var localStorageValue = localStorage.getItem(localStorageVariable);  
-  sendPixel(apiUrl+encodeUriComponent(localStorageValue)+"&bc_tag_event_name="+eventName);
+  var localStorageValue = localStorage.getItem(localStorageVariable); 
+  var _referralHost = getReferrerUrl("hostname");
+  var _hostname = getUrl("hostname");
+  var created_at = "&created_at=" + getTimestamp();
+  var hostname = "&hostname=" + encodeUriComponent(_hostname);           
+  var referral_hostname = "&referral_hostname=" + encodeUriComponent(_referralHost);       
+  var event_name = "&bc_tag_event_name="+eventName;
+  if(localStorageValue){
+    log(apiUrl+localStorageValue+created_at+hostname+referral_hostname+event_name);
+    sendPixel(apiUrl+localStorageValue+created_at+hostname+referral_hostname+event_name);
+  }  
 }
 
 const validate = (data) => {
@@ -130,19 +134,23 @@ const start = (data) => {
     data.gtmOnFailure();
     return;
   }
-
-  saveQueryParametersAsCookie();
   
   if(data.bc_tag_event_name==="page_visit"){
+    log("sending blind creator tag page_visit event...");
     sendEventToBCAPI("page_visit");
   } else if(data.bc_tag_event_name==="add_to_cart"){
+    log("sending blind creator tag add_to_cart event...");
     sendEventToBCAPI("add_to_cart");
   } else if(data.bc_tag_event_name==="conversion"){
+    log("sending blind creator tag add_to_cart conversion...");
     sendEventToBCAPI("conversion");
   }
   
   data.gtmOnSuccess();
 };
+
+saveQueryParametersAsCookie();
+
 
 start(data);
 
@@ -318,6 +326,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 10/27/2023, 7:53:04 AM
+Created on 10/30/2023, 6:39:19 PM
 
 
